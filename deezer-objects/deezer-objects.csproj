@@ -87,6 +87,7 @@
     <Compile Include="Artist.cs" />
     <Compile Include="DataArtist.cs" />
     <Compile Include="Deezer.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Track.cs" />
     <Compile Include="TracksResponse.cs" />

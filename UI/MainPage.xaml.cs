@@ -13,6 +13,7 @@ using Microsoft.Phone.BackgroundAudio;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Windows.Resources;
+using UI.ViewModel;
 
 namespace UI
 {
@@ -22,34 +23,29 @@ namespace UI
         public MainPage()
         {
             InitializeComponent();
-            // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
-            Deezer dz = new Deezer();
-            dz.getTopTracks(6, (response) => SetListsDataSource(response));
-        }
-
-        private void SetListsDataSource(TracksResponse tr)
-        {
-            LBTracks.ItemsSource = tr.Tracks.Data;
+            BackgroundAudioPlayer.Instance.PlayStateChanged += Instance_PlayStateChanged;
+            MainViewModel.progress = Progress;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("coucou :)");
         }
-
+        
         private void LBTracks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Track track = (Track)LBTracks.SelectedItem;
-            BackgroundAudioPlayer.Instance.Track = new AudioTrack(
-                new Uri(track.Preview),
+            ListBox lstBox = (ListBox)sender;
+            Track track = (Track)lstBox.SelectedItem;
+            AudioTrack curTrack = new AudioTrack(
+                new Uri(track.Preview, UriKind.Absolute),
                 track.Title,
                 track.Artist.Name,
                 track.Album.Title,
                 new Uri(track.Album.Cover,UriKind.Absolute)
             );
-            BackgroundAudioPlayer.Instance.Volume = 1; 
-            BackgroundAudioPlayer.Instance.PlayStateChanged += Instance_PlayStateChanged;
+            BackgroundAudioPlayer.Instance.Track = curTrack;
+            BackgroundAudioPlayer.Instance.Volume = 1;
+            BackgroundAudioPlayer.Instance.Stop();
             BackgroundAudioPlayer.Instance.Play();
             System.Diagnostics.Debug.WriteLine(track.Preview);
         }
@@ -74,25 +70,9 @@ namespace UI
 
             if (null != BackgroundAudioPlayer.Instance.Track)
             {
+                System.Diagnostics.Debug.WriteLine(BackgroundAudioPlayer.Instance.Track.Title);
             }
         
         }
-
-        
-        // Sample code for building a localized ApplicationBar
-        //private void BuildLocalizedApplicationBar()
-        //{
-        //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
-        //    ApplicationBar = new ApplicationBar();
-
-        //    // Create a new button and set the text value to the localized string from AppResources.
-        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
-        //    appBarButton.Text = AppResources.AppBarButtonText;
-        //    ApplicationBar.Buttons.Add(appBarButton);
-
-        //    // Create a new menu item with the localized string from AppResources.
-        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-        //}
     }
 }
