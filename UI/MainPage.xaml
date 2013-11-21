@@ -1,0 +1,62 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="UI.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+
+    xmlns:Custom="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:ic="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+
+    
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+    <phone:Panorama HorizontalAlignment="Left" Height="768" Title="panorama" VerticalAlignment="Top" Width="480">
+        <phone:PanoramaItem CacheMode="{x:Null}" Header="Tracks">
+            <phone:PanoramaItem.RenderTransform>
+                <TranslateTransform/>
+            </phone:PanoramaItem.RenderTransform>
+            <Grid>
+                <ListBox Name="LBTracks" SelectionChanged="LBTracks_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <!--
+                            <StackPanel>
+                                <Image Source="{Binding Album.Cover}" Width="32" Height="32" />
+                                <TextBlock Text="{Binding Title}" FontSize="20" Padding="5" Foreground="White"/>
+                            </StackPanel>
+                            -->
+                            <Grid Height="106">
+                                
+                                <StackPanel>
+                                    <Image Height="100" Width="100" Source="{Binding Album.Cover}" />
+                                </StackPanel>
+                                <StackPanel Margin="105,0,-327,0">
+                                    <TextBlock Text="{Binding Title}" FontSize="20" Padding="5" Foreground="White"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </phone:PanoramaItem>
+        <phone:PanoramaItem CacheMode="{x:Null}" Header="item2">
+
+            <phone:PanoramaItem.RenderTransform>
+                <TranslateTransform/>
+            </phone:PanoramaItem.RenderTransform>
+            <Grid>
+                <Button Content="Button" HorizontalAlignment="Left" Margin="127,-211,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.706,0.409" Click="Button_Click"/>
+            </Grid>
+        </phone:PanoramaItem>
+    </phone:Panorama>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+
+</phone:PhoneApplicationPage>
