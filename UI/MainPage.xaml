@@ -41,7 +41,7 @@
                         </Custom:EventTrigger>
                     </Custom:Interaction.Triggers>-->
                 </TextBox>
-                <ListBox ItemsSource="{Binding TracksFinded}" ItemTemplate="{StaticResource TrackTemplate}" SelectionChanged="LBTracks_SelectionChanged" Margin="0,77,0,0">
+                <ListBox ItemsSource="{Binding TracksFinded}" ItemTemplate="{StaticResource TrackTemplate}" SelectionChanged="LBTracks_SelectionChanged" Margin="0,69,0,0" >
                 </ListBox>
             </Grid>
         </phone:PanoramaItem>
